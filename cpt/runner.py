@@ -134,7 +134,7 @@ class CreateRunner(object):
                             else:
                                 if self._profile_build_abs_path is not None:
                                     profile_build = ProfileData([self._profile_build_abs_path],
-                                                                None, None, None)
+                                                                None, None, None, None)
                                 else:
                                     profile_build = None
 
