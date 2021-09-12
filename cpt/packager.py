@@ -199,8 +199,6 @@ class ConanMultiPackager(object):
 
         self._update_conan_in_docker = always_update_conan_in_docker or get_bool_from_env("CONAN_ALWAYS_UPDATE_CONAN_DOCKER")
 
-        self._platform_info = platform_info or PlatformInfo()
-
         self.stable_branch_pattern = stable_branch_pattern or \
                                      os.getenv("CONAN_STABLE_BRANCH_PATTERN",
                                                "master$ main$ release.* stable.*")
@@ -237,7 +235,7 @@ class ConanMultiPackager(object):
 
         self.docker_conan_home = docker_conan_home or os.getenv("CONAN_DOCKER_HOME", None)
 
-        os_name = self._platform_info.system() if not self.use_docker else "Linux"
+        os_name = platform_info.system() if platform_info else "Linux" if self.use_docker else platform.system()
         self.build_generator = BuildGenerator(reference, os_name, gcc_versions,
                                               apple_clang_versions, clang_versions,
                                               visual_versions, visual_runtimes, visual_toolsets,
